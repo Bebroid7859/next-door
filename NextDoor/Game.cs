@@ -2,7 +2,7 @@ namespace NextDoor
 {
     public static class Game
     {
-        public static Logger Logger = new();
+        public static Logger Logger = new(true);
 
         public static void Main()
         {

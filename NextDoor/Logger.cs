@@ -4,8 +4,10 @@ namespace NextDoor
 
     public class Logger
     {
-        public Logger()
+        public Logger(bool format = true)
         {
+            Format = format;
+
             Colors.Add(0, ConsoleColor.Gray);
             Colors.Add(1, ConsoleColor.Yellow);
             Colors.Add(2, ConsoleColor.Red);
@@ -13,12 +15,15 @@ namespace NextDoor
             Colors.Add(4, ConsoleColor.Blue);
         }
 
-        public Dictionary<byte, ConsoleColor> Colors = new();
+        readonly Dictionary<byte, ConsoleColor> Colors = new();
+        readonly bool Format;
 
         public void Write(LogType type, string text)
         {
             Console.ForegroundColor = Colors[(byte)type];
-            Console.WriteLine(text);
+
+            string prefix = (Format) ? $"[{DateTime.Now.ToString("HH:mm:ss")}] " : "";
+            Console.WriteLine($"{prefix}{text}");
         }
     }
 }
