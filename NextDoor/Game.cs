@@ -2,9 +2,11 @@ namespace NextDoor
 {
     public static class Game
     {
+        public static Logger Logger = new();
+
         public static void Main()
         {
-            Console.WriteLine("рыбу дать");
+            Logger.Write(LogType.Info, "Запустилось!");
         }
     }
 }
