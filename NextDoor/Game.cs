@@ -3,6 +3,7 @@ namespace NextDoor
     public static class Game
     {
         public static Logger Logger = new(true);
+        public static readonly Dictionary<string, Locale> Locales = new();
 
         static void Main()
         {
@@ -11,18 +12,19 @@ namespace NextDoor
                 Logger.Write(LogType.Info, "Initialization...");
                 Initialize();
                 Logger.Write(LogType.Info, "All done!");
-                Run();
             }
             catch (Exception exception)
             {
                 Logger.Write(LogType.Crash, "Initialization failed! Look at the ./crash-log.txt");
                 Logger.HandleCrash(exception);
+                Environment.Exit(0);
             }
+            Run();
         }
 
         static void Initialize()
         {
-            // здесь что-то загружается... 
+            LoadLocales();
         }
 
         static void Run()
@@ -39,6 +41,19 @@ namespace NextDoor
             {
                 Logger.Write(LogType.Crash, "Something went wrong! Look at the ./crash-log.txt");
                 Logger.HandleCrash(exception);
+                Environment.Exit(0);
+            }
+        }
+
+        static void LoadLocales()
+        {
+            var files = Directory
+                .GetFiles("./Assets/Locales/", "*.*", SearchOption.AllDirectories)
+                .Where((x) => x.EndsWith(".yaml"));
+
+            foreach (var file in files)
+            {
+                Locales.Add(file.Replace(".yaml", ""), new Locale(file));
             }
         }
     }
