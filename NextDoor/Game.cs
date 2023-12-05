@@ -42,4 +42,4 @@ namespace NextDoor
             }
         }
     }
-}// git commit -m "Десериализация yaml, обработка крашей"
+}
