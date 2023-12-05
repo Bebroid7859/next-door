@@ -25,5 +25,10 @@ namespace NextDoor
             string prefix = (Format) ? $"[{DateTime.Now.ToString("HH:mm:ss")}] " : "";
             Console.WriteLine($"{prefix}{text}");
         }
+
+        public void HandleCrash(Exception exception)
+        {
+            File.WriteAllText("./crash-log.txt", $"Блин, похоже что-то пошло не так...\n\n{exception.ToString()}");
+        }
     }
 }

@@ -8,31 +8,38 @@ namespace NextDoor
         {
             try
             {
-                Logger.Write(LogType.Info, "Инициализация...");
+                Logger.Write(LogType.Info, "Initialization...");
                 Initialize();
-                Logger.Write(LogType.Info, "Всё в порядке, запуск игры.");
+                Logger.Write(LogType.Info, "All done!");
                 Run();
             }
             catch (Exception exception)
             {
-                Logger.Write(LogType.Crash, "Не всё в порядке. Записываю подробнее в файл ./crash-log.txt");
-                File.WriteAllText("./crash-log.txt", exception.ToString());
+                Logger.Write(LogType.Crash, "Initialization failed! Look at the ./crash-log.txt");
+                Logger.HandleCrash(exception);
             }
         }
 
         static void Initialize()
         {
-            // здесь что-то загружается...
+            // здесь что-то загружается... 
         }
 
         static void Run()
         {
-            Logger.Write(LogType.Info, "Запустилось!");
-
-            while (true)
+            try
             {
-
+                Logger.Write(LogType.Info, "The game is running.");
+                while (true)
+                {
+                    // здесь что-то играется...
+                }
+            }
+            catch (Exception exception)
+            {
+                Logger.Write(LogType.Crash, "Something went wrong! Look at the ./crash-log.txt");
+                Logger.HandleCrash(exception);
             }
         }
     }
-}
+}// git commit -m "Десериализация yaml, обработка крашей"
