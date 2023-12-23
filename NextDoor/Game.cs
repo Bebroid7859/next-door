@@ -1,60 +1,46 @@
 namespace NextDoor
 {
+    public enum GameState { Running, Freezed, Stopping, Uninitialized }
+
     public static class Game
     {
-        public static Logger Logger = new(true);
-        public static readonly Dictionary<string, Locale> Locales = new();
+        public static Logger Logger = new();
+        public static GameState State = GameState.Uninitialized;
 
         static void Main()
         {
             try
             {
-                Logger.Write(LogType.Info, "Initialization...");
                 Initialize();
-                Logger.Write(LogType.Info, "All done!");
+                Logger.Write(LogType.Info, "Всё готово.");
+                Run();
             }
             catch (Exception exception)
             {
-                Logger.Write(LogType.Crash, "Initialization failed! Look at the ./crash-log.txt");
-                Logger.HandleCrash(exception);
-                Environment.Exit(0);
+                Logger.Write(LogType.Crash, "Программа вышла из строя, подробнее в crash-log.txt");
+                HandleCrash(exception);
             }
-            Run();
         }
 
         static void Initialize()
         {
-            LoadLocales();
+
         }
 
         static void Run()
         {
-            try
+            State = GameState.Running;
+            while (State != GameState.Stopping)
             {
-                Logger.Write(LogType.Info, "The game is running.");
-                while (true)
-                {
-                    // здесь что-то играется...
-                }
-            }
-            catch (Exception exception)
-            {
-                Logger.Write(LogType.Crash, "Something went wrong! Look at the ./crash-log.txt");
-                Logger.HandleCrash(exception);
-                Environment.Exit(0);
+                Graphics.Renderer.Update();
             }
         }
 
-        static void LoadLocales()
+        static void HandleCrash(Exception exception)
         {
-            var files = Directory
-                .GetFiles("./Assets/Locales/", "*.*", SearchOption.AllDirectories)
-                .Where((x) => x.EndsWith(".yaml"));
-
-            foreach (var file in files)
-            {
-                Locales.Add(file.Replace(".yaml", ""), new Locale(file));
-            }
+            State = GameState.Stopping;
+            File.WriteAllText("./crash-log.txt", exception.ToString());
+            Environment.Exit(69);
         }
     }
 }

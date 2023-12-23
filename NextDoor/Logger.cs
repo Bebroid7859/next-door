@@ -4,10 +4,10 @@ namespace NextDoor
 
     public class Logger
     {
-        public Logger(bool format = true)
-        {
-            Format = format;
+        readonly Dictionary<byte, ConsoleColor> Colors = new();
 
+        public Logger()
+        {
             Colors.Add(0, ConsoleColor.Gray);
             Colors.Add(1, ConsoleColor.Yellow);
             Colors.Add(2, ConsoleColor.Red);
@@ -15,20 +15,12 @@ namespace NextDoor
             Colors.Add(4, ConsoleColor.Blue);
         }
 
-        readonly Dictionary<byte, ConsoleColor> Colors = new();
-        readonly bool Format;
-
         public void Write(LogType type, string text)
         {
             Console.ForegroundColor = Colors[(byte)type];
 
-            string prefix = (Format) ? $"[{DateTime.Now.ToString("HH:mm:ss")}] " : "";
+            var prefix = (type == LogType.Debug) ? $"[{DateTime.Now.ToString("HH:mm:ss")}] " : "";
             Console.WriteLine($"{prefix}{text}");
-        }
-
-        public void HandleCrash(Exception exception)
-        {
-            File.WriteAllText("./crash-log.txt", $"Блин, похоже что-то пошло не так...\n\n{exception.ToString()}");
         }
     }
 }
