@@ -1,9 +1,4 @@
 publish:
-	@dotnet publish NextDoor -c Release -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true --verbosity normal -p:TargetPlatform=osx-x64 --runtime osx-x64 --output ./bin/NextDoor.macOS.x64
-	@cp -r ./Assets ./bin/NextDoor.macOS.x64
-	@rm ./bin/NextDoor.macOS.x64/NextDoor.pdb
-	@zip -r "./bin/NextDoor.macOS.x64.Release.zip" ./bin/NextDoor.macOS.x64
-
 	@dotnet publish NextDoor -c Release -p:PublishSingleFile=true -p:PublishTrimmed=true --self-contained true --verbosity normal -p:TargetPlatform=osx-arm64 --runtime osx-arm64 --output ./bin/NextDoor.macOS.arm64
 	@cp -r ./Assets ./bin/NextDoor.macOS.arm64
 	@rm ./bin/NextDoor.macOS.arm64/NextDoor.pdb
