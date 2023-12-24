@@ -25,5 +25,10 @@ namespace NextDoor.Graphics
                 TextureRect = new IntRect(Convert.ToInt32(SpriteSize.X * (sprite - 1)), 0, SpriteSize.X, SpriteSize.Y)
             };
         }
+
+        public IntRect GetRect(byte sprite, float size = 1)
+        {
+            return new IntRect(Convert.ToInt32(SpriteSize.X * (sprite - 1)), 0, SpriteSize.X, SpriteSize.Y);
+        }
     }
 }

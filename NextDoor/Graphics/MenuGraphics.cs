@@ -34,7 +34,7 @@ namespace NextDoor.Graphics
             Vans.Add(new AnimatedVanRight());
         }
 
-        public void Update()
+        public void Underlay()
         {
             Background.Update();
             Renderer.Window.DispatchEvents();
@@ -57,7 +57,10 @@ namespace NextDoor.Graphics
                 van.Color();
                 Renderer.Window.Draw(van.Van);
             }
+        }
 
+        public void Overlap()
+        {
             foreach (var color in colors2) { Renderer.Window.Draw(color); }
         }
     }

@@ -5,7 +5,6 @@ namespace NextDoor.Widgets
     public class LabelWidget : Widget
     {
         public LabelWidget() : base() { }
-        public LabelWidget(Dictionary<string, string> yaml) : this(new WidgetInfo(yaml["Id"], yaml["OverrideHover"], yaml["IsChild"]), yaml["Text"], yaml["FontPath"], Convert.ToUInt32(yaml["FontSize"]), new Color(Convert.ToByte(yaml["Color"].Split(",")[0].Replace(" ", "")), Convert.ToByte(yaml["Color"].Split(",")[1].Replace(" ", "")), Convert.ToByte(yaml["Color"].Split(",")[2].Replace(" ", ""))), new Vector2(yaml["X"], yaml["Y"])) { }
         public LabelWidget(WidgetInfo info, string text, string fontPath, uint fontSize, Color color, Vector2 position, bool visible = true) : base()
         {
             Id = info.Id;

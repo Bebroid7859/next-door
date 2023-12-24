@@ -1,5 +1,6 @@
 using NextDoor.Input;
 using NextDoor.Widgets;
+using NextDoor.Graphics;
 
 namespace NextDoor
 {
@@ -9,6 +10,8 @@ namespace NextDoor
     {
         public static Logger Logger = new();
         public static GameState State = GameState.Uninitialized;
+        public static Overlay Overlay = new Overlay();
+        public static IInputHandler InputHandler = new DefaultInputHandler();
 
         static void Main()
         {
@@ -27,7 +30,9 @@ namespace NextDoor
 
         static void Initialize()
         {
-            
+            Renderer.Initialize();
+            Overlay = new MenuOverlay();
+            Overlay.Load();
         }
 
         static void Run()

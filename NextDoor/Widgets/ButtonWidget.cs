@@ -1,6 +1,8 @@
 using SFML.Graphics;
 using SFML.System;
+using SFML.Window;
 using NextDoor.Graphics;
+using NextDoor.Input;
 
 namespace NextDoor.Widgets
 {
@@ -11,27 +13,30 @@ namespace NextDoor.Widgets
         {
             set
             {
-                var shape = (RectangleShape)Shape;
-                shape.Texture = Sheet.GetShape((byte)value).Texture;
-                Shape = shape;
+                ((RectangleShape)Shape).Texture = Sheet.Texture;
+                ((RectangleShape)Shape).TextureRect = Sheet.GetRect(1);
             }
         }
         public Sheet Sheet { get; }
-
-        public ButtonWidget(Dictionary<string, string> yaml) : this(new WidgetInfo(yaml["Id"], yaml["OverrideHover"], yaml["IsChild"]), new Sheet(new Texture(yaml["Sheet"]), 3), yaml) { }
-        public ButtonWidget(WidgetInfo info, Sheet sheet, Dictionary<string, string> yaml)
+        public ButtonWidget(WidgetInfo info, Sheet sheet, Vector2 xy)
         {
             Id = info.Id;
             OverrideHover = info.OverrideHover;
-            Sheet = new Sheet(new Texture(yaml["Sheet"]), 3);
+            Sheet = sheet;
 
-            Shape = new RectangleShape(new Vector2f(Sheet.GetShape(1, 1).Texture.Size.X, Sheet.GetShape(1, 1).Texture.Size.Y))
+            Shape = new RectangleShape(new Vector2f(Sheet.GetShape(1, 1).Size.X, Sheet.GetShape(1, 1).Size.Y))
             {
                 Texture = Sheet.GetShape(1).Texture,
-                Position = new Vector2f(Convert.ToInt32(yaml["X"]), Convert.ToInt32(yaml["Y"]))
+                TextureRect = Sheet.GetShape(1).TextureRect,
+                Position = xy.ToVector2f()
             };
 
             Add(info.IsChild);
+        }
+
+        public override void HandleKeyInput(KeyInput args)
+        {
+            
         }
     }
 }

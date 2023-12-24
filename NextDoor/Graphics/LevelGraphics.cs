@@ -23,12 +23,15 @@ namespace NextDoor.Graphics
             }
         }
 
-        public void Update()
+        public void Underlay()
         {
             Background.Update();
             Renderer.Window.DispatchEvents();
             Renderer.Window.Clear(new Color(Background.DarkG, Background.DarkG, Background.DarkG, 0));
+        }
 
+        public void Overlap()
+        {
             foreach (var color in colors) { Renderer.Window.Draw(color); }
         }
     }
