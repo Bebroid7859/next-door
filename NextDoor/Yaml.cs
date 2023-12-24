@@ -8,7 +8,6 @@ namespace NextDoor
 
             foreach (var obj in File.ReadAllText(file).Split("\n"))
             {
-                if (!obj.Contains(":")) continue;
                 if (obj.Split(":")[1].Length < 1) data.Add(obj.Replace(":", ""), new Dictionary<string, string>());
                 else data.ElementAt(data.Count() - 1).Value.Add(obj.Split(": ")[0].Replace(" ", "".Replace(" ", "")), obj.Split(": ")[1].Replace("\"", ""));
             }

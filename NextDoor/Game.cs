@@ -1,3 +1,6 @@
+using NextDoor.Input;
+using NextDoor.Widgets;
+
 namespace NextDoor
 {
     public enum GameState { Running, Freezed, Stopping, Uninitialized }
@@ -24,7 +27,7 @@ namespace NextDoor
 
         static void Initialize()
         {
-
+            
         }
 
         static void Run()

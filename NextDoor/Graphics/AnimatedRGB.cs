@@ -5,6 +5,7 @@ namespace NextDoor.Graphics
         public byte R { get => R1; }
         public byte G { get => G1; }
         public byte B { get => B1; }
+        public byte DarkG { get => (G1 / 7 > 15) ? Convert.ToByte(G / 7) : Convert.ToByte(15); }
 
         byte R1;
         byte R2;

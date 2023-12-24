@@ -16,7 +16,6 @@ namespace NextDoor.Graphics
 
         public MenuGraphics()
         {
-
             Renderer.Window.SetFramerateLimit(30);
             for (int i = 0; i < Renderer.Window.Size.Y; i++)
             {

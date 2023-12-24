@@ -32,7 +32,7 @@ namespace NextDoor.Graphics
                 SpawnedVan = true;
                 MenuGraphics.Vans.Add(new AnimatedVanRight());
             }
-            if (Van.Position.X > Renderer.Window.Size.X + 300)
+            if (Van.Position.X > Renderer.Window.Size.X + 350)
             {
                 MenuGraphics.Vans.Remove(this);
                 MenuGraphics.UnusedVans.Add(this);
@@ -71,7 +71,7 @@ namespace NextDoor.Graphics
                 SpawnedVan = true;
                 MenuGraphics.Vans.Add(new AnimatedVanLeft());
             }
-            if (Van.Position.X < -300)
+            if (Van.Position.X < -350)
             {
                 MenuGraphics.Vans.Remove(this);
                 MenuGraphics.UnusedVans.Add(this);
