@@ -24,7 +24,7 @@ namespace NextDoor.Widgets
         {
             base.Load();
             Audio.SetBackgroundMusic("./Assets/Audio/Music/VanSteppin.mp3", 64);
-            new ButtonWidget(new WidgetInfo("Test", "false", "false"), new Sheet(new Texture("./Assets/test.png"), 3), new Vector2(50, 50));
+            Widget.Widgets.Add("MainMenuController", new MainMenuWidget(new WidgetInfo("Controller", "false", "false")));
         }
     }
 }

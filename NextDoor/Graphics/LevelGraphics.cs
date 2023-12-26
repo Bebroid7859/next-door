@@ -26,7 +26,6 @@ namespace NextDoor.Graphics
         public void Underlay()
         {
             Background.Update();
-            Renderer.Window.DispatchEvents();
             Renderer.Window.Clear(new Color(Background.DarkG, Background.DarkG, Background.DarkG, 0));
         }
 

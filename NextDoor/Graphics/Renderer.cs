@@ -14,8 +14,8 @@ namespace NextDoor.Graphics
 
     public static class SfmlInputHandler
     {
-        public static void ModifierKeys(object? sender, KeyEventArgs args) { }
-        public static void OnKeyInput(object? sender, TextEventArgs args) { Game.InputHandler.OnKeyInput(new KeyInput(args.Unicode)); }
+        public static void ModifierKeys(object? sender, KeyEventArgs args) { Game.InputHandler.OnKeyInput(new KeyInput(args.Code.ToString())); }
+        // public static void OnKeyInput(object? sender, TextEventArgs args) { Game.InputHandler.OnKeyInput(new KeyInput(args.Unicode)); }
         public static void OnMouseClickInput(object? sender, MouseButtonEventArgs args) { Game.InputHandler.OnMouseClickInput(new MouseInput(new Vector2(args.X, args.Y), args.Button.ToString())); }
         public static void OnMouseMoveInput(object? sender, MouseMoveEventArgs args) { Game.InputHandler.OnMouseMovedInput(new Vector2(args.X, args.Y)); }
         public static void OnMouseReleaseInput(object? sender, MouseButtonEventArgs args) { Game.InputHandler.OnMouseMovedInput(new Vector2(args.X, args.Y)); }
@@ -30,7 +30,7 @@ namespace NextDoor.Graphics
         {
             Window.MouseButtonReleased += SfmlInputHandler.OnMouseReleaseInput;
             Window.MouseButtonPressed += SfmlInputHandler.OnMouseClickInput;
-            Window.TextEntered += SfmlInputHandler.OnKeyInput;
+           // Window.TextEntered += SfmlInputHandler.OnKeyInput;
             Window.KeyPressed += SfmlInputHandler.ModifierKeys;
             Window.MouseMoved += SfmlInputHandler.OnMouseMoveInput;
             Game.Logger.Write(LogType.Info, "Правила рендеринга установлены.");
@@ -45,6 +45,7 @@ namespace NextDoor.Graphics
                 else Window.Draw((Text)widget.Shape);
             }
             BackgroundGraphics.Overlap();
+            Window.DispatchEvents();
             Window.Display();
         }
     }
